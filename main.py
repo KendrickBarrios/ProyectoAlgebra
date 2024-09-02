@@ -1,15 +1,32 @@
 from fractions import Fraction
 import matriz
 import eliminacionGaussiana as gauss
+import os
 
-# Ejemplo de matriz aumentada sin solución
-matriz = [
-    [Fraction(1), Fraction(-2), Fraction(1), Fraction(0)],
-    [Fraction(0), Fraction(2), Fraction(-8), Fraction(8)],
-    [Fraction(-4), Fraction(5), Fraction(9), Fraction(-9)]
-]
+def main():
+    op = "."
+    while op != "2":
+        os.system("cls")
+        print("Proyecto de Algebra Lineal\n")
+        print("Opciones")
+        print("1. Resolver sistema mediante eliminacion Gaussiana")
+        print("2. Salir del programa\n")
+        op = input("Elija la opcion que desea realizar: ")
+        print("")
 
-print("Matriz original\n")
-gauss.mostrarMatriz(matriz)
-s = gauss.resolverMatriz(matriz)
-gauss.mostrarMatriz(s)
+        if op == "1":
+            m = matriz.leerMatriz()
+            os.system("cls")
+            print("Matriz original")
+            gauss.mostrarMatriz(m)
+            s = gauss.resolverMatriz(m)
+            input("\nPresione ENTER para continuar.")
+        elif op == "2":
+            print("Gracias por usar el programa.")
+            input("Presione ENTER para continuar.")
+        else:
+            print("Por favor elija una opcion valida. (1-2).")
+            input("Presione ENTER para continuar.")
+
+if __name__ == "__main__":
+    main()
