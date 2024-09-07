@@ -15,11 +15,13 @@ def main():
         print("")
 
         if op == "1":
-            m = matriz.leerMatriz()
+            m = matriz.leerMatriz("c")
             os.system("cls")
             print("Matriz original")
-            gauss.mostrarMatriz(m)
+            matriz.mostrarMatriz(m)
             s = gauss.resolverMatriz(m)
+            if s is not None:
+                matriz.mostrarSistema(m)
             input("\nPresione ENTER para continuar.")
         elif op == "2":
             print("Gracias por usar el programa.")
