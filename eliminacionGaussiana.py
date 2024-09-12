@@ -26,7 +26,7 @@ def resolverMatriz(mat):
         pivote = mat[i][i]
         if pivote != 1 and pivote != 0:
             mat[i] = [x / pivote for x in mat[i]]
-            mensaje = f"f{i + 1} -> f{i + 1}/{pivote}"
+            mensaje = f"f{i + 1} -> f{i + 1}/({pivote})"
             print(mensaje)
             print("-"*(len(mensaje) - 1), end=">\n")
             print("")
@@ -37,7 +37,7 @@ def resolverMatriz(mat):
             if mat[j][i] != 0:
                 factor = mat[j][i]
                 mat[j] = [mat[j][k] - factor * mat[i][k] for k in range(columnas)]
-                mensaje = f"f{j + 1} -> f{j + 1} - {factor}f{i + 1}"
+                mensaje = f"f{j + 1} -> f{j + 1} - ({factor})f{i + 1}"
                 print(mensaje)
                 print("-"*(len(mensaje) - 1), end=">\n")
                 print("")
@@ -51,7 +51,7 @@ def resolverMatriz(mat):
             if mat[j][i] != 0:
                 factor = mat[j][i]
                 mat[j] = [mat[j][k] - factor * mat[i][k] for k in range(columnas)]
-                mensaje = f"f{j + 1} -> f{j + 1} - {factor}f{i + 1}"
+                mensaje = f"f{j + 1} -> f{j + 1} - ({factor})f{i + 1}"
                 print(mensaje)
                 print("-"*(len(mensaje) - 1), end=">\n")
                 print("")

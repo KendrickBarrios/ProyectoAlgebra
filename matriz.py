@@ -74,12 +74,12 @@ def mostrarMatriz(matriz):
     
     for fila in matriz:
         print("(", end=" ")
-        print("  ".join(f"{str(fila[i]):>{ancho}}" for i in range(len(fila) - 1)), end="  |")
+        print("  ".join(f"{str(fila[i]):>{ancho}}" for i in range(len(fila) - 1)), end="        |")
         print("  ".join(f"{str(fila[len(fila) - 1]):>{ancho}}"), end=" )\n")
     print()
 
 def mostrarSistema(matriz):
-    print("Solucion del sistema")
+    print("Solucion del sistema\n")
     for fila in matriz:
         print("{", end="")
         for i in range(len(fila)):
@@ -90,3 +90,40 @@ def mostrarSistema(matriz):
                     print("    ", end="")
             else:
                 print(f" = {fila[i]}")
+
+def mostrarInconsistente(matriz):
+    print("El sistema no tiene solucion\n")
+    mostrarMatriz(matriz)
+
+def mostrarInfinitas(matriz):
+    print("El sistema tiene infinitas soluciones\n")
+    filas = len(matriz)
+    columnas = len(matriz[0])
+    
+    noLibres = []
+    mensajes = {}
+
+    for i in range(filas):
+        for k in range(columnas - 1):
+            mensaje = ""
+            if matriz[i][k] != 0 and k not in noLibres:
+                noLibres.append(k)
+                mensaje += "{ " + f"x{k + 1} ="
+                if matriz[i][columnas - 1] != 0:
+                    mensaje += f" {matriz[i][columnas - 1]} "
+                for l in range(k + 1, columnas - 1):
+                    if matriz[i][l] < 0:
+                        if mensaje[len(mensaje) - 1] == "=":
+                            mensaje += f" {abs(matriz[i][l])}x{l + 1}"
+                        else:
+                            mensaje += f" + {abs(matriz[i][l])}x{l + 1}"
+                    elif matriz[i][l] > 0:
+                        mensaje += f" - {matriz[i][l]}x{l + 1}"
+                mensajes[k] = mensaje
+                break
+
+    for i in range(columnas - 1):
+        if i in noLibres:
+            print(mensajes[i])
+        else:
+            print("{ " + f"x{i + 1} es libre")
