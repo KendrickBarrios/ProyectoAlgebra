@@ -2,17 +2,20 @@ from fractions import Fraction
 import matriz
 import eliminacionGaussiana as gauss
 import escalon
+import operacionesVectores
 import os
 
 def main():
     op = "."
-    while op != "3":
+    while op != "5":
         os.system("cls")
         print("Proyecto de Algebra Lineal\n")
         print("Opciones")
         print("1. Reducir mediante Eliminacion Gaussiana")
         print("2. Reducir a Forma escalonada")
-        print("3. Salir del programa\n")
+        print("3. Sumar vectores")
+        print("4. Multiplicar vectores")
+        print("5. Salir del programa\n")
         op = input("Elija la opcion que desea realizar: ")
         print("")
 
@@ -44,6 +47,15 @@ def main():
                 print("Opcion no valida.")
             input("\nPresione ENTER para continuar.")
         elif op == "3":
+            os.system("cls")
+            print("3. Sumar vectores\n")
+            operacionesVectores.sumaVectores()
+            input("\nPresione ENTER para continuar.")
+        elif op == "4":
+            os.system("cls")
+            print("4. Multiplicar vectores\n")
+            input("\nPresione ENTER para continuar.")
+        elif op == "5":
             print("Gracias por usar el programa.")
             input("Presione ENTER para continuar.")
         else:

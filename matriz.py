@@ -127,3 +127,4 @@ def mostrarInfinitas(matriz):
             print(mensajes[i])
         else:
             print("{ " + f"x{i + 1} es libre")
+            
