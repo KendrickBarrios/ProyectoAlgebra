@@ -54,6 +54,7 @@ def main():
         elif op == "4":
             os.system("cls")
             print("4. Multiplicar vectores\n")
+            operacionesVectores.multVectores()
             input("\nPresione ENTER para continuar.")
         elif op == "5":
             print("Gracias por usar el programa.")

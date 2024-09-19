@@ -58,3 +58,31 @@ def sumaVectores():
 
     for fila in resultado:
         print(fila)
+
+def multVectores():
+    vLineal = vector.leerVector("Lectura del vector lineal")
+    vColumnar = vector.leerVector("Lectura del vector columnar")
+    s = []
+    if len(vLineal) != len(vColumnar):
+        os.system("cls")
+        print("Las matrices no pueden multiplicarse pues no tienen el mismo numero de entradas.")
+        return
+    
+    os.system("cls")
+    print("Vector lineal = [", end=" ")
+    for i in range(len(vLineal)):
+        print(vLineal[i], end=" ")
+        s.append(vLineal[i]*vColumnar[i])
+    print("]")
+
+    print("Vector columnar = [", end=" ")
+    for i in range(len(vLineal)):
+        print(vColumnar[i], end=" ")
+    print("]")
+
+    print("\nResultado")
+    for i in range(len(vLineal)):
+        if i < len(vLineal) - 1:
+            print(s[i], end=" + ")
+        else:
+            print(s[i])
