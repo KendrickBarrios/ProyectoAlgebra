@@ -1,23 +1,23 @@
 import matriz
-import fractions
 import os
 
-def leerVector(mensaje):
-    v = []
-    n = 0
+def leerDimensiones(mensaje):
     pase = False
     while not pase:
-        os.system("cls")
         pase = True
         try:
-            n = int(input("Ingrese el numero de dimensiones que tendra el vector: "))
+            n = int(input(mensaje))
         except ValueError:
             pase = False
-            input("El valor ingresado debe ser un numero entero.")
+            input("El valor ingresado debe ser un numero entero. Presione ENTER para continuar.")
             continue
         if n <= 0:
             pase = False
-            input("El numero de dimensiones del vector debe ser mayor a 0.")
+            input("El numero de dimensiones debe ser mayor a 0. Presione ENTER para continuar.")
+    return n
+
+def leerVector(mensaje, n):
+    v = []
 
     print(mensaje)
     for i in range(n):
@@ -25,3 +25,7 @@ def leerVector(mensaje):
         v.append(f)
 
     return v
+
+def mostrarResultado(resultado):
+    for fila in resultado:
+        print(fila)
