@@ -2,12 +2,13 @@ from fractions import Fraction
 import matriz
 import eliminacionGaussiana as gauss
 import escalon
+import vector
 import operacionesVectores
 import os
 
 def main():
     op = "."
-    while op != "5":
+    while op != "6":
         os.system("cls")
         print("Proyecto de Algebra Lineal\n")
         print("Opciones")
@@ -15,7 +16,8 @@ def main():
         print("2. Reducir a Forma escalonada")
         print("3. Sumar vectores")
         print("4. Multiplicar vectores")
-        print("5. Salir del programa\n")
+        print("5. Producto de matriz por una suma de vectores")
+        print("6. Salir del programa\n")
         op = input("Elija la opcion que desea realizar: ")
         print("")
 
@@ -48,15 +50,38 @@ def main():
             input("\nPresione ENTER para continuar.")
         elif op == "3":
             os.system("cls")
-            print("3. Sumar vectores\n")
-            operacionesVectores.sumaVectores()
+            titulo = "3. Sumar vectores\n"
+            print(titulo)
+            _, _, _, resultado = operacionesVectores.sumaVectores(titulo)
+            vector.mostrarResultadoSumaVectores(resultado)
             input("\nPresione ENTER para continuar.")
         elif op == "4":
             os.system("cls")
-            print("4. Multiplicar vectores\n")
-            operacionesVectores.multVectores()
+            titulo = "4. Multiplicar vectores\n"
+            print(titulo)
+            operacionesVectores.multVectores(titulo)
             input("\nPresione ENTER para continuar.")
         elif op == "5":
+            os.system("cls")
+            titulo = "5. Producto de matriz por una suma de vectores\n"
+            print(titulo)
+            resultado, proceso1, proceso2, proceso3, _, _ = operacionesVectores.productoMatrizSuma(titulo)
+            os.system("cls")
+            print(titulo)
+            print("Suma de vectores\n")
+            vector.mostrarResultado(resultado)
+            print("\nMatriz por suma de vectores\n")
+            vector.mostrarResultado(proceso1)
+            print("")
+            print("\nMatriz por cada vector\n")
+            for i in range(len(proceso2)):
+                vector.mostrarResultado(proceso2[i])
+                print("")
+            print("Suma de productos individuales\n")
+            vector.mostrarResultado(proceso3)
+            print("")
+            input("Presione ENTER para continuar.")
+        elif op == "6":
             print("Gracias por usar el programa.")
             input("Presione ENTER para continuar.")
         else:
