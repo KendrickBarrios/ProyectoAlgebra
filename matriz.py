@@ -18,6 +18,9 @@ def validarCoeficiente(mensaje):
             input("El valor ingresado no es valido. Presione ENTER para continuar.")
     return f   
 
+# c: Cuadrada
+# r: Rectangular
+# s: Sin columna aumentada
 def leerMatriz(tipo):
     a = []
     m = 0
@@ -41,13 +44,26 @@ def leerMatriz(tipo):
                 m = int(input("Ingrese el numero de filas que tendra la matriz: "))
                 n = int(input("Ingrese el numero de columnas que tendra la matriz (sin contar la columna aumentada): "))
             except ValueError:
-                input("El valor ingresado debe ser un numero entero. Presione ENTER para continuar.")
+                input("Los valores ingresados deben ser numeros enteros. Presione ENTER para continuar.")
+                pase = False
+                continue
+            if m <= 1 or n <= 1:
+                input("Los enteros ingresados deben ser positivos mayores a 1. Presione ENTER para continuar.")
+                pase = False
+        elif tipo == "s":
+            try:
+                m = int(input("Ingrese el numero de filas que tendra la matriz: "))
+                n = int(input("Ingrese el numero de columnas que tendra la matriz: "))
+            except ValueError:
+                input("Los valores ingresados deben ser numeros enteros. Presione ENTER para continuar.")
                 pase = False
                 continue
             if m <= 1 or n <= 1:
                 input("Los enteros ingresados deben ser positivos mayores a 1. Presione ENTER para continuar.")
                 pase = False
 
+
+    print()
     if tipo == "c":
         for i in range(m):
             a.append([])
@@ -66,9 +82,16 @@ def leerMatriz(tipo):
                 else:
                     f = validarCoeficiente(f"Inserte el valor de la columna aumentada para la fila [{i}]: ")
                 a[i].append(f)
+    elif tipo == "s":
+        for i in range(m):
+            a.append([])
+            for j in range(n):
+                f = validarCoeficiente(f"Inserte el coeficiente en la posicion [{i}][{j}]: ")
+                a[i].append(f)
 
     return a
 
+# mostrar matriz con columna aumentada
 def mostrarMatriz(matriz):
     ancho = 10
     
@@ -76,6 +99,15 @@ def mostrarMatriz(matriz):
         print("(", end=" ")
         print("  ".join(f"{str(fila[i]):>{ancho}}" for i in range(len(fila) - 1)), end="        |")
         print("  ".join(f"{str(fila[len(fila) - 1]):>{ancho}}"), end=" )\n")
+    print()
+
+# mostrar matriz sin columna aumentada
+def mostrarMatrizS(matriz):
+    ancho = 10
+    
+    for fila in matriz:
+        print("[", end=" ")
+        print("  ".join(f"{str(fila[i]):>{ancho}}" for i in range(len(fila))), end="        ]\n")
     print()
 
 def mostrarSistema(matriz):
