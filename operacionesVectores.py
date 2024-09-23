@@ -198,15 +198,15 @@ def productoMatrizSuma(titulo):
     maxAnchoProductos = []
     for k in range(len(matAvectores)):
         maxAnchoProductos.append(0)
-        for i in range(len(matAvectores[i])):
+        for i in range(len(matAvectores[0])):
             if len(str(matAvectores[k][i])) > maxAnchoProductos[k]:
                 maxAnchoProductos[k] = len(str(matAvectores[k][i]))
 
     # Se agregan los resultados a proceso2
     for k in range(len(proceso2)):
-        for i in range(len(matAvectores[i])):
+        for i in range(len(matAvectores[0])):
             linea = ""
-            if i != int(len(matAvectores[i])/2):
+            if i != int(len(matAvectores[0])/2):
                 linea += f"     [ {str(matAvectores[k][i]).center(maxAnchoProductos[k], ' ')} ]"
             else:
                 linea += f"  =  [ {str(matAvectores[k][i]).center(maxAnchoProductos[k], ' ')} ]"
@@ -214,7 +214,7 @@ def productoMatrizSuma(titulo):
     
     # Se construye el mensaje proceso 3 con la suma de los vectores resultantes
     proceso3 = []
-    for k in range(len(matAvectores[i])):
+    for k in range(len(matAvectores[0])):
         linea = ""
         for i in range(len(matAvectores)):
             if i != 0:
