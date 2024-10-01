@@ -219,9 +219,9 @@ def productoMatrizSuma(titulo):
         for i in range(len(matAvectores)):
             if i != 0:
                 if k != int(len(matAvectores[i])/2):
-                    linea += f"   [ {str(matAvectores[i][k]).center(maxAnchoVectores[i], ' ')} ]"
+                    linea += f"   [ {str(matAvectores[i][k]).center(maxAnchoProductos[i], ' ')} ]"
                 else:
-                    linea += f" + [ {str(matAvectores[i][k]).center(maxAnchoVectores[i], ' ')} ]"
+                    linea += f" + [ {str(matAvectores[i][k]).center(maxAnchoProductos[i], ' ')} ]"
             else:
                 linea += f"[ {str(matAvectores[i][k]).center(maxAnchoVectores[i], ' ')} ]"
         proceso3.append(linea)
@@ -233,4 +233,5 @@ def productoMatrizSuma(titulo):
         else:
             proceso3[k] += f"  =  [ {str(matAuv[k]).center(maxAncho3, ' ')} ]"
 
+    proceso3.append("\nSe cumple la propiedad distributiva.")
     return resultado, proceso1, proceso2, proceso3, matAuv, matAvectores
