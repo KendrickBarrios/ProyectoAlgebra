@@ -87,7 +87,7 @@ def formaEscalonada(mat):
 
     if not ninguna:
         for fila in range(filas):
-            if columnas > filas or all(mat[fila][columna] == 0 for columna in range(columnas)):
+            if columnas > (filas + 1) or all(mat[fila][columna] == 0 for columna in range(columnas)):
                 infinitas = True
                 break
     
