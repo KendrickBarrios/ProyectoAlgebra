@@ -16,7 +16,20 @@ def sumaMatrices(titulo):
             for k in range(len(matrices[0][0])):
                 resultado[j][k] += (escalares[i] * matrices[i][j][k])
     
-    return resultado
+    return matrices, resultado
+
+def mostrarSumaMatrices(matrices, resultado):
+    for i, matriz in enumerate(matrices, start=1):
+        print(f"Matriz {i}:")
+        for fila in matriz:
+            fila_str = [str(elem) for elem in fila]
+            print(f"  [{', '.join(fila_str)}]")  # Añadir corchetes
+        print()
+    
+    print("Resultado:")
+    for fila in resultado:
+        fila_str = [str(elem) for elem in fila]
+        print(f"  [{', '.join(fila_str)}]")
 
 def productoMatrices(titulo):
     print("Lectura de la matriz A\n")
