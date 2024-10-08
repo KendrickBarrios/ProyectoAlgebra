@@ -4,11 +4,12 @@ import eliminacionGaussiana as gauss
 import escalon
 import vector
 import operacionesVectores
+import operacionesMatrices
 import os
 
 def main():
     op = "."
-    while op != "6":
+    while op != "9":
         os.system("cls")
         print("Proyecto de Algebra Lineal\n")
         print("Opciones")
@@ -17,7 +18,9 @@ def main():
         print("3. Sumar vectores")
         print("4. Multiplicar vectores")
         print("5. Producto de matriz por una suma de vectores")
-        print("6. Salir del programa\n")
+        print("6. Suma de matrices")
+        print("7. Producto de matrices/vectores")
+        print("8. Salir del programa\n")
         op = input("Elija la opcion que desea realizar: ")
         print("")
 
@@ -79,9 +82,21 @@ def main():
                 print("")
             print("Suma de productos individuales\n")
             vector.mostrarResultado(proceso3)
-            print("")
-            input("Presione ENTER para continuar.")
+            input("\nPresione ENTER para continuar.")
         elif op == "6":
+            os.system("cls")
+            titulo = "6. Suma de matrices\n"
+            resultado = operacionesMatrices.sumaMatrices("6. Suma de matrices\n")
+            print("\n" + titulo + "\n")
+            for fila in resultado:
+                print(fila)
+            input("\nPresione ENTER para continuar.")
+        elif op == "7":
+            os.system("cls")
+            titulo = "7. Producto de matrices/vectores\n"
+            operacionesMatrices.productoMatrices(titulo)
+            input("\nPresione ENTER para continuar.")
+        elif op == "9":
             print("Gracias por usar el programa.")
             input("Presione ENTER para continuar.")
         else:

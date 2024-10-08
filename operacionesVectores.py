@@ -119,10 +119,13 @@ def productoMatrizSuma(titulo):
         linea = "["
         for j in range(len(mat[0])):
             linea += f" {str(mat[i][j]).center(maxAncho, ' ')} "
-        if i != int(len(mat)/2):
+        if i != int(len(mat)/2) and i in range(len(s)):
             linea += f"]     [ {str(s[i]).center(maxAncho2, ' ')} ]     "
-        else:
+        elif i in range(len(s)):
             linea += f"]  *  [ {str(s[i]).center(maxAncho2, ' ')} ]  =  "
+        else:
+            espacio = " "*maxAncho2
+            linea += "]       " + espacio.center(maxAncho2, ' ') + "       "
         proceso1.append(linea)
 
     # Calcula el producto de la matriz por la suma, y agrega las operaciones a proceso1
@@ -171,10 +174,13 @@ def productoMatrizSuma(titulo):
             linea = "["
             for j in range(len(vectores[k])):
                 linea += f" {str(mat[i][j]).center(maxAncho, ' ')} "
-            if i != int(len(mat)/2):
+            if i in range(len(s)) and i != int(len(mat)/2):
                 linea += f"]     [ {str(vectores[k][i] * escalares[k]).center(maxAnchoVectores[k], ' ')} ]     "
-            else:
+            elif i in range(len(s)):
                 linea += f"]  *  [ {str(vectores[k][i] * escalares[k]).center(maxAnchoVectores[k], ' ')} ]  =  "
+            else:
+                espacio = " "*maxAnchoVectores[k]
+                linea += "]       " + espacio.center(maxAnchoVectores[k], ' ') + "       "
             proceso2[k].append(linea)
 
     # Calcula los productos individuales y agrega las operaciones a las lineas de proceso2
