@@ -16,14 +16,14 @@ def sumaMatrices(titulo):
             for k in range(len(matrices[0][0])):
                 resultado[j][k] += (escalares[i] * matrices[i][j][k])
     
-    return matrices, resultado
+    return matrices, escalares, resultado
 
-def mostrarSumaMatrices(matrices, resultado):
+def mostrarSumaMatrices(matrices, escalares, resultado):
     for i, matriz in enumerate(matrices, start=1):
-        print(f"Matriz {i}:")
+        print(f"Matriz {i} * {escalares[i-1]}:")
         for fila in matriz:
-            fila_str = [str(elem) for elem in fila]
-            print(f"  [{', '.join(fila_str)}]")  # Añadir corchetes
+            fila_str = [str(elem * escalares[i-1]) for elem in fila]
+            print(f"  [{', '.join(fila_str)}]")  
         print()
     
     print("Resultado:")

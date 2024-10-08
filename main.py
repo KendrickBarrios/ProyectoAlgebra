@@ -86,9 +86,9 @@ def main():
         elif op == "6":
             os.system("cls")
             titulo = "6. Suma de matrices\n"
-            matrices, resultado = operacionesMatrices.sumaMatrices("6. Suma de matrices\n")
+            matrices, escalares, resultado = operacionesMatrices.sumaMatrices("6. Suma de matrices\n")
             print("\n" + titulo + "\n")
-            operacionesMatrices.mostrarSumaMatrices(matrices, resultado)
+            operacionesMatrices.mostrarSumaMatrices(matrices, escalares, resultado)
             input("\nPresione ENTER para continuar.")
         elif op == "7":
             os.system("cls")
