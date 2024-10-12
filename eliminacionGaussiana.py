@@ -18,6 +18,9 @@ def resolverMatriz(mat):
                     matriz.mostrarMatriz(mat)
                     if esInconsistente(mat) is None:
                         return None
+                    elif tieneInfinitas(mat):
+                        matriz.mostrarInfinitas(mat)
+                        return None
                     break
             else:
                 continue  # Si no encuentra un pivote valido, pasa a la siguiente columna
@@ -58,6 +61,9 @@ def resolverMatriz(mat):
                 matriz.mostrarMatriz(mat)
                 if esInconsistente(mat) is None:
                     return None
+                elif tieneInfinitas(mat):
+                    matriz.mostrarInfinitas(mat)
+                    return None
 
     return mat
 
@@ -68,3 +74,8 @@ def esInconsistente(mat):
             print("El sistema no tiene solución.")
             return None  # No hay solucion debido a inconsistencia
     return mat
+
+def tieneInfinitas(mat):
+    for fila in mat:
+        if all(x == 0 for x in fila):
+            return True

@@ -66,7 +66,7 @@ def productoMatrices(titulo):
                     for j in range(len(b[0])):   # Recorre las columnas de b
                         for k in range(len(b)):  # Recorre las filas de b
                             resultado[i][j] += a[i][k] * b[k][j]
-                mostrarFactores(a, b, False, False, True)
+                matriz.mostrarFactores(a, b, False, False, True)
                 print("\nResultado:\n")
                 matriz.mostrarMatrizS(resultado)
                 resultado.clear()
@@ -81,7 +81,7 @@ def productoMatrices(titulo):
                     for j in range(len(b)):         # Recorre las filas de b (transpuestas en columnas)
                         for k in range(len(b[0])):  # Recorre las columnas de b
                             resultado[i][j] += a[i][k] * b[j][k]  # Usa b transpuesta
-                mostrarFactores(a, b, False, True, True)
+                matriz.mostrarFactores(a, b, False, True, True)
                 print("\nResultado:\n")
                 matriz.mostrarMatrizS(resultado)
                 resultado.clear()
@@ -96,7 +96,7 @@ def productoMatrices(titulo):
                     for j in range(len(b[0])):  # Recorre las columnas de b
                         for k in range(len(a)): # Recorre las filas de a
                             resultado[i][j] += a[k][i] * b[k][j]  # Usa a transpuesta
-                mostrarFactores(a, b, True, False, True)
+                matriz.mostrarFactores(a, b, True, False, True)
                 print("\nResultado:\n")
                 matriz.mostrarMatrizS(resultado)
                 resultado.clear()
@@ -111,7 +111,7 @@ def productoMatrices(titulo):
                     for j in range(len(b)):     # Recorre las filas de b (transpuestas en columnas)
                         for k in range(len(a)): # Recorre las filas de a
                             resultado[i][j] += a[k][i] * b[j][k]  # Usa a^T y b^T
-                mostrarFactores(a, b, True, True, True)
+                matriz.mostrarFactores(a, b, True, True, True)
                 print("\nResultado:\n")
                 matriz.mostrarMatrizS(resultado)
                 resultado.clear()
@@ -126,7 +126,7 @@ def productoMatrices(titulo):
                     for j in range(len(a[0])):   # Recorre las columnas de b
                         for k in range(len(a)):  # Recorre las filas de b
                             resultado[i][j] += b[i][k] * a[k][j]
-                mostrarFactores(b, a, False, False, False)
+                matriz.mostrarFactores(b, a, False, False, False)
                 print("\nResultado:\n")
                 matriz.mostrarMatrizS(resultado)
                 resultado.clear()
@@ -141,7 +141,7 @@ def productoMatrices(titulo):
                     for j in range(len(a)):         # Recorre las filas de b (transpuestas en columnas)
                         for k in range(len(a[0])):  # Recorre las columnas de b
                             resultado[i][j] += b[i][k] * a[j][k]  # Usa b transpuesta
-                mostrarFactores(b, a, False, True, False)
+                matriz.mostrarFactores(b, a, False, True, False)
                 print("\nResultado:\n")
                 matriz.mostrarMatrizS(resultado)
                 resultado.clear()
@@ -156,7 +156,7 @@ def productoMatrices(titulo):
                     for j in range(len(a[0])):  # Recorre las columnas de b
                         for k in range(len(b)): # Recorre las filas de a
                             resultado[i][j] += b[k][i] * a[k][j]  # Usa a transpuesta
-                mostrarFactores(b, a, True, False, False)
+                matriz.mostrarFactores(b, a, True, False, False)
                 print("\nResultado:\n")
                 matriz.mostrarMatrizS(resultado)
                 resultado.clear()
@@ -171,7 +171,7 @@ def productoMatrices(titulo):
                     for j in range(len(a)):     # Recorre las filas de b (transpuestas en columnas)
                         for k in range(len(b)): # Recorre las filas de a
                             resultado[i][j] += b[k][i] * a[j][k]  # Usa a^T y b^T
-                mostrarFactores(b, a, True, True, False)
+                matriz.mostrarFactores(b, a, True, True, False)
                 print("\nResultado:\n")
                 matriz.mostrarMatrizS(resultado)
                 resultado.clear()
@@ -179,46 +179,3 @@ def productoMatrices(titulo):
             input("\nVolviendo al menu principal.")
             return
         input("Presione ENTER para continuar.")
-
-def mostrarFactores(a, b, t1, t2, o):
-    if o:
-        m1 = "A"
-        m2 = "B"
-    else:
-        m1 = "B"
-        m2 = "A"
-
-    if t1:
-        m1 += "t"
-
-    if t2:
-        m2 += "t"
-
-    def transponer(matrix):
-        return [[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))]
-
-    def matrix_to_str(matrix):
-        return [[str(element) for element in row] for row in matrix]
-    # Imprimir la matriz a o su transpuesta
-    print(f"\n{m1}:")
-    if t1:
-        a_transpuesta = transponer(a)
-        a_t_str = matrix_to_str(a_transpuesta)
-        for row in a_t_str:
-            print(row)
-    else:
-        a_str = matrix_to_str(a)
-        for row in a_str:
-            print(row)
-
-    print(f"\n{m2}:")
-    # Imprimir la matriz b o su transpuesta
-    if t2:
-        b_transpuesta = transponer(b)
-        b_t_str = matrix_to_str(b_transpuesta)
-        for row in b_t_str:
-            print(row)
-    else:
-        b_str = matrix_to_str(b)
-        for row in b_str:
-            print(row)

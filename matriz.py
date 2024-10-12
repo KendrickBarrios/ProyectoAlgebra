@@ -138,18 +138,17 @@ def mostrarMatrizS(matriz):
         print("  ".join(f"{str(fila[i]):>{ancho}}" for i in range(len(fila))), end="        ]\n")
     print()
 
-def mostrarSistema(matriz):
+def mostrarUnicaGauss(matriz):
     print("Solucion del sistema\n")
     for fila in matriz:
         print("{", end="")
         for i in range(len(fila)):
-            if i < len(fila) - 1:
+            if i < len(fila):
                 if fila[i] == 1:
                     print(f"  x{i + 1}", end="")
                 else:
                     print("    ", end="")
-            else:
-                print(f" = {fila[i]}")
+        print(f" = {fila[i]}")
 
 def mostrarInconsistente(matriz):
     print("El sistema no tiene solucion\n")
@@ -188,3 +187,58 @@ def mostrarInfinitas(matriz):
         else:
             print("{ " + f"x{i + 1} es libre")
             
+def transponer(matrix):
+    return [[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))]
+
+def matrix_to_str(matrix):
+    return [[str(element) for element in row] for row in matrix]
+
+def mostrarFactores(a, b, t1, t2, o):
+    if o:
+        m1 = "A"
+        m2 = "B"
+    else:
+        m1 = "B"
+        m2 = "A"
+
+    if t1:
+        m1 += "t"
+
+    if t2:
+        m2 += "t"
+
+    # Imprimir la matriz a o su transpuesta
+    print(f"\n{m1}:")
+    if t1:
+        a_transpuesta = transponer(a)
+        a_t_str = matrix_to_str(a_transpuesta)
+        for row in a_t_str:
+            print(row)
+    else:
+        a_str = matrix_to_str(a)
+        for row in a_str:
+            print(row)
+
+    print(f"\n{m2}:")
+    # Imprimir la matriz b o su transpuesta
+    if t2:
+        b_transpuesta = transponer(b)
+        b_t_str = matrix_to_str(b_transpuesta)
+        for row in b_t_str:
+            print(row)
+    else:
+        b_str = matrix_to_str(b)
+        for row in b_str:
+            print(row)
+
+def generarTranspuesta():
+    a = leerMatriz("s")
+    b = transponer(a)
+    return a, b
+
+def mostrarTranspuesta(titulo, a, b):
+    print(titulo)
+    print("Matriz original: ")
+    mostrarMatrizS(a)
+    print("\nMatriz transpuesta: ")
+    mostrarMatrizS(b)

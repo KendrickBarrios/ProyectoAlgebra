@@ -17,10 +17,11 @@ def main():
         print("2. Reducir a Forma escalonada")
         print("3. Sumar vectores")
         print("4. Multiplicar vectores")
-        print("5. Producto de matriz por una suma de vectores")
-        print("6. Suma de matrices")
-        print("7. Producto de matrices/vectores")
-        print("8. Salir del programa\n")
+        print("5. Transponer matriz")
+        print("6. Producto de matriz por una suma de vectores")
+        print("7. Suma de matrices")
+        print("8. Producto de matrices/vectores")
+        print("9. Salir del programa\n")
         op = input("Elija la opcion que desea realizar: ")
         print("")
 
@@ -32,7 +33,7 @@ def main():
             matriz.mostrarMatriz(m)
             s = gauss.resolverMatriz(m)
             if s is not None:
-                matriz.mostrarSistema(m)
+                matriz.mostrarUnicaGauss(m)
             input("\nPresione ENTER para continuar.")
         elif op == "2":
             os.system("cls")
@@ -66,7 +67,14 @@ def main():
             input("\nPresione ENTER para continuar.")
         elif op == "5":
             os.system("cls")
-            titulo = "5. Producto de matriz por una suma de vectores\n"
+            titulo = "5. Transponer matriz\n"
+            print(titulo)
+            a, b = matriz.generarTranspuesta()
+            matriz.mostrarTranspuesta(titulo, a, b)
+            input("\nPresione ENTER para continuar.")
+        elif op == "6":
+            os.system("cls")
+            titulo = "6. Producto de matriz por una suma de vectores\n"
             print(titulo)
             resultado, proceso1, proceso2, proceso3, _, _ = operacionesVectores.productoMatrizSuma(titulo)
             os.system("cls")
@@ -83,16 +91,16 @@ def main():
             print("Suma de productos individuales\n")
             vector.mostrarResultado(proceso3)
             input("\nPresione ENTER para continuar.")
-        elif op == "6":
+        elif op == "7":
             os.system("cls")
-            titulo = "6. Suma de matrices\n"
+            titulo = "7. Suma de matrices\n"
             matrices, escalares, resultado = operacionesMatrices.sumaMatrices("6. Suma de matrices\n")
             print("\n" + titulo + "\n")
             operacionesMatrices.mostrarSumaMatrices(matrices, escalares, resultado)
             input("\nPresione ENTER para continuar.")
-        elif op == "7":
+        elif op == "8":
             os.system("cls")
-            titulo = "7. Producto de matrices/vectores\n"
+            titulo = "8. Producto de matrices/vectores\n"
             operacionesMatrices.productoMatrices(titulo)
             input("\nPresione ENTER para continuar.")
         elif op == "9":
