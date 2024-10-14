@@ -5,11 +5,12 @@ import escalon
 import vector
 import operacionesVectores
 import operacionesMatrices
+import det
 import os
 
 def main():
     op = "."
-    while op != "9":
+    while op != "10":
         os.system("cls")
         print("Proyecto de Algebra Lineal\n")
         print("Opciones")
@@ -21,7 +22,8 @@ def main():
         print("6. Producto de matriz por una suma de vectores")
         print("7. Suma de matrices")
         print("8. Producto de matrices/vectores")
-        print("9. Salir del programa\n")
+        print("9. Calcular el determinante de una matriz")
+        print("10. Salir del programa\n")
         op = input("Elija la opcion que desea realizar: ")
         print("")
 
@@ -104,6 +106,15 @@ def main():
             operacionesMatrices.productoMatrices(titulo)
             input("\nPresione ENTER para continuar.")
         elif op == "9":
+            mat = matriz.leerMatriz("cs")
+            procedimiento, matrices, determinante = det.calcularDeterminante(mat)
+            os.system("cls")
+            print("9. Calcular el determinante de una matriz\n")
+            det.mostrarResultado(mat, procedimiento, matrices)
+            print(f"\nEl determinante de la matriz ingresada es: {determinante}")
+            input("\nPresione ENTER para continuar.")
+        elif op == "10":
+            os.system("cls")
             print("Gracias por usar el programa.")
             input("Presione ENTER para continuar.")
         else:

@@ -62,6 +62,15 @@ def leerMatriz(tipo):
             if m <= 0 or n <= 0:
                 input("Los enteros ingresados deben ser mayores a 0. Presione ENTER para continuar.")
                 pase = False
+        elif tipo == "cs":
+            try:
+                m = int(input("Ingrese el numero de filas y columnas que tendra la matriz: "))
+            except ValueError:
+                input("El valor ingresado debe ser un numero entero. Presione ENTER para continuar.")
+                pase = False
+            if m <= 1:
+                input("El entero ingresado debe ser positivo mayor a 1. Presione ENTER para continuar.")
+                pase = False
         elif tipo == "xs":
             try:
                 m = int(input("Ingrese el numero de filas que tendran las matrices: "))
@@ -98,7 +107,9 @@ def leerMatriz(tipo):
                     f = validarCoeficiente(f"Inserte el valor de la columna aumentada para la fila [{i}]: ")
                 a[i].append(f)
         return a
-    elif tipo == "s":
+    elif tipo == "s" or tipo == "cs":
+        if tipo == "cs":
+            n = m
         for i in range(m):
             a.append([])
             for j in range(n):
