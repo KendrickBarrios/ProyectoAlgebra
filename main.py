@@ -116,13 +116,13 @@ def main():
             print(titulo)
             if determinante == 0:
                 det.mostrarResultado(mat, mensaje, matrices)
-                print("\nDado que el determinante es 0, la matriz puede tener infinitas soluciones o ninguna solucion.")
+                print("\nDado que el determinante es 0, la matriz puede tener infinitas soluciones o ninguna solucion.\n")
                 resolver = input("Ingrese 'Y' para resolver la matriz por forma escalonada, o cualquier otro valor para continuar: ").capitalize()
                 if resolver == "Y":
                     os.system("cls")
                     print("Matriz original")
-                    matriz.mostrarMatriz(m)
-                    escalon.formaEscalonada(m)
+                    matriz.mostrarMatriz(mat)
+                    escalon.formaEscalonada(mat)
             else:
                 det.mostrarResultado(mat, mensaje, matrices)
                 print("\nMatriz sin columna aumentada")

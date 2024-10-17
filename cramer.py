@@ -16,7 +16,7 @@ def aplicarCramer(mat):
     # Calculo del determinante de la matriz original
     mensaje, matrices, determinante = det.calcularDeterminante(mat2)
     if determinante == 0:
-        return mensaje, matrices, determinante, [None] * 7
+        return mensaje, matrices, determinante, None, None, None, None, None, None, None
 
     for i in range(len(mat)):
         matC.append([])

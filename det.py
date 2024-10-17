@@ -36,7 +36,7 @@ def calcularDeterminante(mat):
         # Si todavía es 0 después de intentar el intercambio, la matriz es singular
         if mat[i][i] == 0:
             mensaje.append(f"La matriz es singular, determinante es 0.\n")
-            return mensaje, 0
+            return mensaje, [], 0
         
         # Hacemos ceros debajo del pivote
         for j in range(i + 1, n):
