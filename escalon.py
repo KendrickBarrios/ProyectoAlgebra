@@ -96,4 +96,4 @@ def formaEscalonada(mat):
     elif infinitas:
         matriz.mostrarInfinitas(mat)
     else:
-        matriz.mostrarSistema(mat)
+        matriz.mostrarUnicaGauss(mat)

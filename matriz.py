@@ -135,9 +135,9 @@ def mostrarMatriz(matriz):
     ancho = 10
     
     for fila in matriz:
-        print("(", end=" ")
+        print("[", end=" ")
         print("  ".join(f"{str(fila[i]):>{ancho}}" for i in range(len(fila) - 1)), end="        |")
-        print("  ".join(f"{str(fila[len(fila) - 1]):>{ancho}}"), end=" )\n")
+        print("  ".join(f"{str(fila[len(fila) - 1]):>{ancho}}"), end=" ]\n")
     print()
 
 # mostrar matriz sin columna aumentada

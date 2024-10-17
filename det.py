@@ -1,3 +1,4 @@
+import copy
 import matriz
 from fractions import Fraction
 
@@ -29,7 +30,7 @@ def calcularDeterminante(mat):
                     mat[i], mat[j] = mat[j], mat[i]
                     intercambios += 1
                     mensaje.append(f"f{i + 1} <-> f{j + 1}\n")
-                    matrices.append(mat)
+                    matrices.append(copy.deepcopy(mat))
                     break
 
         # Si todavía es 0 después de intentar el intercambio, la matriz es singular
@@ -44,7 +45,7 @@ def calcularDeterminante(mat):
                 for k in range(i, m):
                     mat[j][k] -= factor * mat[i][k]
                 mensaje.append(f"f{j + 1} -> f{j + 1} - ({factor})f{i + 1}\n")
-                matrices.append(mat)
+                matrices.append(copy.deepcopy(mat))
 
     # Cálculo del determinante
     for i in range(min(n, m)):
@@ -57,9 +58,8 @@ def calcularDeterminante(mat):
     return mensaje, matrices, det
 
 def mostrarResultado(mat, mensaje, matrices):
-    print("Matriz original:")
     matriz.mostrarMatrizS(mat)
     print("")
-    for i in range(len(mensaje)):
+    for i in range(len(matrices)):
         print(mensaje[i])
         matriz.mostrarMatrizS(matrices[i])

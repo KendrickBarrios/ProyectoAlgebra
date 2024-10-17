@@ -1,3 +1,4 @@
+import copy
 from fractions import Fraction
 import matriz
 import eliminacionGaussiana as gauss
@@ -6,11 +7,12 @@ import vector
 import operacionesVectores
 import operacionesMatrices
 import det
+import cramer
 import os
 
 def main():
     op = "."
-    while op != "10":
+    while op != "11":
         os.system("cls")
         print("Proyecto de Algebra Lineal\n")
         print("Opciones")
@@ -23,7 +25,8 @@ def main():
         print("7. Suma de matrices")
         print("8. Producto de matrices/vectores")
         print("9. Calcular el determinante de una matriz")
-        print("10. Salir del programa\n")
+        print("10. Aplicar regla de Cramer")
+        print("11. Salir del programa\n")
         op = input("Elija la opcion que desea realizar: ")
         print("")
 
@@ -40,19 +43,11 @@ def main():
         elif op == "2":
             os.system("cls")
             print("2. Forma escalonada\n")
-            sel = input("1. Resolver matriz ejemplo\n2. Leer una nueva matriz\n\nElija:")
-            if sel == "1":
-                m = [[Fraction(2), Fraction(0), Fraction(1), Fraction(3)], [Fraction(1), Fraction(-1), Fraction(-1), Fraction(1)], [Fraction(3), Fraction(-1), Fraction(0), Fraction(4)]]
-                matriz.mostrarMatriz(m)
-                escalon.formaEscalonada(m)
-            elif sel == "2":
-                m = matriz.leerMatriz("r")
-                os.system("cls")
-                print("Matriz original")
-                matriz.mostrarMatriz(m)
-                escalon.formaEscalonada(m)
-            else:
-                print("Opcion no valida.")
+            m = matriz.leerMatriz("r")
+            os.system("cls")
+            print("Matriz original")
+            matriz.mostrarMatriz(m)
+            escalon.formaEscalonada(m)
             input("\nPresione ENTER para continuar.")
         elif op == "3":
             os.system("cls")
@@ -114,6 +109,34 @@ def main():
             print(f"\nEl determinante de la matriz ingresada es: {determinante}")
             input("\nPresione ENTER para continuar.")
         elif op == "10":
+            mat = matriz.leerMatriz("c")
+            mensaje, matrices, determinante, matC, b, matAib, pasosMatAib, mensajesMatAib, determinantesAib, solucion = cramer.aplicarCramer(copy.deepcopy(mat))
+            titulo = "10. Aplicar regla de Cramer\n"
+            os.system("cls")
+            print(titulo)
+            if determinante == 0:
+                det.mostrarResultado(mat, mensaje, matrices)
+                print("\nDado que el determinante es 0, la matriz puede tener infinitas soluciones o ninguna solucion.")
+                resolver = input("Ingrese 'Y' para resolver la matriz por forma escalonada, o cualquier otro valor para continuar: ").capitalize()
+                if resolver == "Y":
+                    os.system("cls")
+                    print("Matriz original")
+                    matriz.mostrarMatriz(m)
+                    escalon.formaEscalonada(m)
+            else:
+                det.mostrarResultado(mat, mensaje, matrices)
+                print("\nMatriz sin columna aumentada")
+                matriz.mostrarMatrizS(matC)
+                print("\nColumna aumentada")
+                matriz.mostrarMatrizS(b)
+                for i in range(len(matAib)):
+                    print(f"Matriz A{i+1}(b)")
+                    det.mostrarResultado(matAib[i], mensajesMatAib[i], pasosMatAib[i])
+                    print(f"Determinante de la matriz A{i+1}(b) = {determinantesAib[i]}\n")
+                print("Solucion del sistema")
+                cramer.mostrarSolucionCramer(determinante, determinantesAib, solucion)
+            input("\nPresione ENTER para continuar.")
+        elif op == "11":
             os.system("cls")
             print("Gracias por usar el programa.")
             input("Presione ENTER para continuar.")
