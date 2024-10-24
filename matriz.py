@@ -149,6 +149,29 @@ def mostrarMatrizS(matriz):
         print("  ".join(f"{str(fila[i]):>{ancho}}" for i in range(len(fila))), end="        ]\n")
     print()
 
+def mostrarMatrizInvertible(matriz, inversa):
+    ancho = 10
+    
+    for i in range(len(matriz)):
+        print("[", end=" ")
+        # for j in range(len(matriz[0])):
+        #     for k in range(2):
+        #         if k == 0:
+        #             print(f"{str(matriz[i][j]):^ancho}")
+        #             else
+        for k in range(2):
+            for j in range(len(matriz[0])):
+                if k == 0:
+                    print(f"{str(matriz[i][j]):^{ancho}}", end="")
+                else:
+                    print(f"{str(inversa[i][j]):^{ancho}}", end="")
+            if k == 0:
+                print(" |", end=" ")
+            else:
+                print("]")
+
+    print()
+
 def mostrarUnicaGauss(matriz):
     print("Solucion del sistema\n")
     for fila in matriz:

@@ -8,11 +8,12 @@ import operacionesVectores
 import operacionesMatrices
 import det
 import cramer
+import inversa
 import os
 
 def main():
     op = "."
-    while op != "11":
+    while op != "12":
         os.system("cls")
         print("Proyecto de Algebra Lineal\n")
         print("Opciones")
@@ -26,7 +27,8 @@ def main():
         print("8. Producto de matrices/vectores")
         print("9. Calcular el determinante de una matriz")
         print("10. Aplicar regla de Cramer")
-        print("11. Salir del programa\n")
+        print("11. Obtener la inversa de una matriz")
+        print("12. Salir del programa\n")
         op = input("Elija la opcion que desea realizar: ")
         print("")
 
@@ -116,7 +118,7 @@ def main():
             print(titulo)
             if determinante == 0:
                 det.mostrarResultado(mat, mensaje, matrices)
-                print("\nDado que el determinante es 0, la matriz puede tener infinitas soluciones o ninguna solucion.\n")
+                print("\nDado que el determinante es 0, la matriz no puede ser resuelta con el método de Cramer.\n")
                 resolver = input("Ingrese 'Y' para resolver la matriz por forma escalonada, o cualquier otro valor para continuar: ").capitalize()
                 if resolver == "Y":
                     os.system("cls")
@@ -125,6 +127,7 @@ def main():
                     escalon.formaEscalonada(mat)
             else:
                 det.mostrarResultado(mat, mensaje, matrices)
+                print(f"\nDeterminante de la matriz original: {determinante}")
                 print("\nMatriz sin columna aumentada")
                 matriz.mostrarMatrizS(matC)
                 print("\nColumna aumentada")
@@ -137,6 +140,21 @@ def main():
                 cramer.mostrarSolucionCramer(determinante, determinantesAib, solucion)
             input("\nPresione ENTER para continuar.")
         elif op == "11":
+            mat = matriz.leerMatriz("cs")
+            os.system("cls")
+            procedimiento, matrices, determinante = det.calcularDeterminante(copy.deepcopy(mat))
+            if determinante == 0:
+                det.mostrarResultado(mat, procedimiento, matrices)
+                print("\nDado que la matriz es singular, no tiene inversa.")
+            else:
+                inv = inversa.generarIdentidad(mat)
+                print("Matriz [ A  I ]")
+                matriz.mostrarMatrizInvertible(mat, inv)
+                inv = inversa.calcularInversa(mat, inv)
+                print("\nMatriz inversa:")
+                matriz.mostrarMatrizS(inv)
+            input("\nPresione ENTER para continuar.")
+        elif op == "12":
             os.system("cls")
             print("Gracias por usar el programa.")
             input("Presione ENTER para continuar.")
