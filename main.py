@@ -9,11 +9,15 @@ import operacionesMatrices
 import det
 import cramer
 import inversa
+import funciones
+import biseccion
+from sympy import symbols, sympify
+from sympy.parsing.sympy_parser import parse_expr, standard_transformations, implicit_multiplication_application
 import os
 
 def main():
     op = "."
-    while op != "12":
+    while op != "14":
         os.system("cls")
         print("Proyecto de Algebra Lineal\n")
         print("Opciones")
@@ -28,7 +32,8 @@ def main():
         print("9. Calcular el determinante de una matriz")
         print("10. Aplicar regla de Cramer")
         print("11. Obtener la inversa de una matriz")
-        print("12. Salir del programa\n")
+        print("12. Encontrar raiz de una funcion por metodo de biseccion")
+        print("14. Salir del programa\n")
         op = input("Elija la opcion que desea realizar: ")
         print("")
 
@@ -155,6 +160,22 @@ def main():
                 matriz.mostrarMatrizS(inv)
             input("\nPresione ENTER para continuar.")
         elif op == "12":
+            titulo = "12. Encontrar raiz de una funcion por metodo de biseccion\n"
+            os.system("cls")
+            print(titulo)
+            funcion = funciones.leerFuncion()
+            print("")
+            intervalo = funciones.leerIntervalo()
+            multi = input("\nDesea encontrar todas las raices existentes en el intervalo? (s/n): ").lower()
+            os.system("cls")
+            if multi == "s":
+                raiz, mensaje = biseccion.metodoBiseccionMultiraiz(funcion, intervalo)
+            else:
+                raiz, mensaje = biseccion.metodoBiseccion(funcion, intervalo)
+            print(titulo)
+            vector.mostrarResultado(mensaje)
+            input("\nPresione ENTER para continuar.")
+        elif op == "14":
             os.system("cls")
             print("Gracias por usar el programa.")
             input("Presione ENTER para continuar.")

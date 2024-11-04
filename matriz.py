@@ -16,7 +16,7 @@ def validarCoeficiente(mensaje):
         except ValueError:
             pase = False
             input("El valor ingresado no es valido. Presione ENTER para continuar.")
-    return f   
+    return f
 
 # c: Cuadrada
 # r: Rectangular
