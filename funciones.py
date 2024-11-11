@@ -1,4 +1,4 @@
-from sympy import symbols, sympify
+from sympy import symbols, sympify, diff
 from sympy.parsing.sympy_parser import parse_expr, standard_transformations, implicit_multiplication_application
 
 # Definicion simbolica de la variable
@@ -76,6 +76,9 @@ def leerFuncion():
         print("Error parsing function:", e)
         return None
 
+def derivar(function_expr, var):
+    return diff(function_expr, var)
+
 def evaluarFuncion(function_expr, x_value):
     try:
         # Evalua la funcion
@@ -101,3 +104,37 @@ def leerIntervalo():
     intervalo.append(inf)
     intervalo.append(sup)
     return intervalo
+
+def leerError():
+    pase = False
+    while not pase:
+        pase = True
+        try:
+            error = float(input("\nIngrese el error a considerar: "))
+            if error < 0:
+                pase = False
+                print("\nEl error ingresado debe ser un numero positivo.")
+                input("Presione ENTER para continuar.\n")
+        except ValueError:
+            print("\nEl error ingresado debe ser un numero entero o decimal.")
+            input("Presione ENTER para continuar.\n")
+    return error
+
+def leerInicialIteraciones():
+    pase = False
+    while not pase:
+        pase = True
+        try:
+            valor = float(input("Ingrese el valor inicial a evaluar: "))
+            iteraciones = int(input("\nIngrese el numero de iteraciones a realizar: "))
+            if iteraciones < 1:
+                pase = False
+                print("\nEl numero de iteraciones ingresado debe ser mayor o igual a 1.")
+                input("Presione ENTER para continuar.\n")
+        except ValueError:
+            print("\nEl valor inicial ingresado debe ser un numero entero o con decimales.")
+            print("El numero de iteraciones debe ser un numero entero.")
+            input("Presione ENTER para continuar.\n")
+            pase = False
+
+    return valor, iteraciones

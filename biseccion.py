@@ -2,17 +2,17 @@ import funciones
 from sympy import symbols, sympify
 from sympy.parsing.sympy_parser import parse_expr, standard_transformations, implicit_multiplication_application
 
-def metodoBiseccion(funcion, intervalo):
+def metodoBiseccion(funcion, intervalo, error):
     mensaje = []
     ancho = 15
     iteraciones = 0
     evaluaciones = [0, 0, 0]
-    error = 0.0001
     a, b, c, fa, fb, fc = "a", "b", "c", "f(a)", "f(b)", "f(c)"
     relleno = "-"*16
     
     mensaje.append(f"Funcion ingresada: {str(funcion)}\n")
     mensaje.append(f"Intervalo: [{intervalo[0]}, {intervalo[1]}]\n")
+    mensaje.append(f"Tolerancia: {error}\n")
     mensaje.append(f"{a:^{ancho}} | {b:^{ancho}} | {c:^{ancho}} | {fa:^{ancho}} | {fb:^{ancho}} | {fc:^{ancho}}")
     mensaje.append(f"{relleno}+-{relleno}+-{relleno}+-{relleno}+-{relleno}+-{relleno}")
 
@@ -54,7 +54,7 @@ def metodoBiseccion(funcion, intervalo):
 
     return c, mensaje
 
-def metodoBiseccionMultiraiz(funcion, intervalo, subdivisiones=100, error=0.0001):
+def metodoBiseccionMultiraiz(funcion, intervalo, error, subdivisiones=100):
     mensaje = []
     ancho = 15
     iteraciones_totales = 0
@@ -64,6 +64,7 @@ def metodoBiseccionMultiraiz(funcion, intervalo, subdivisiones=100, error=0.0001
 
     mensaje.append(f"Funcion ingresada: {str(funcion)}\n")
     mensaje.append(f"Intervalo: [{intervalo[0]}, {intervalo[1]}]\n")
+    mensaje.append(f"Tolerancia: {error}\n")
     mensaje.append(f"{a:^{ancho}} | {b:^{ancho}} | {c:^{ancho}} | {fa:^{ancho}} | {fb:^{ancho}} | {fc:^{ancho}}")
     mensaje.append(f"{relleno}+-{relleno}+-{relleno}+-{relleno}+-{relleno}+-{relleno}")
 

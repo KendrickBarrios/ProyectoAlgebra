@@ -1,0 +1,53 @@
+import funciones
+from sympy import symbols, sympify, diff
+from sympy.parsing.sympy_parser import parse_expr, standard_transformations, implicit_multiplication_application
+
+def metodoNewtonRaphson(funcion, derivada, inicial, maxIteraciones, error):
+    mensaje = []
+    ancho = 15
+    raiz = None
+    relleno = "-"*16
+
+    mensaje.append(f"Funcion ingresada {str(funcion)}\n")
+    mensaje.append(f"Derivada de la funcion: {str(derivada)}\n")
+    mensaje.append(f"Valor inicial: {inicial}\n")
+    mensaje.append(f"Tolerancia: {error}\n")
+    it, xi, xi1, fxi, dfxi = "Iteracion", "xi", "xi+1", "f(xi)", "f'(xi)"
+    mensaje.append(f"{it:^{ancho}} | {xi:^{ancho}} | {xi1:^{ancho}} | {fxi:^{ancho}} | {dfxi:^{ancho}}")
+    mensaje.append(f"{relleno}+-{relleno}+-{relleno}+-{relleno}+-{relleno}")
+
+    actual = inicial
+    for i in range(maxIteraciones):
+        fxi = funciones.evaluarFuncion(funcion, actual)
+        dfxi = funciones.evaluarFuncion(derivada, actual)
+
+        if abs(dfxi) < 1e-10:
+            sActual = "{:.6f}".format(actual)
+            sSiguiente = "---"
+            sfxi = "{:.6f}".format(fxi)
+            sdfxi = "{:.6f}".format(dfxi)
+            mensaje.append(f"{str(i+1):^{ancho}} | {sActual:^{ancho}} | {sSiguiente:^{ancho}} | {sfxi:^{ancho}} | {sdfxi:^{ancho}}")
+            mensaje.append("\nValor de la derivada muy pequeño, posible division por cero. Metodo detenido.\n")
+            break
+
+        siguiente = actual-(fxi/dfxi)
+
+        sActual = "{:.6f}".format(actual)
+        sSiguiente = "{:.6f}".format(siguiente)
+        sfxi = "{:.6f}".format(fxi)
+        sdfxi = "{:.6f}".format(dfxi)
+        mensaje.append(f"{str(i+1):^{ancho}} | {sActual:^{ancho}} | {sSiguiente:^{ancho}} | {sfxi:^{ancho}} | {sdfxi:^{ancho}}")
+
+        if abs(funciones.evaluarFuncion(funcion, siguiente)) < error:
+            raiz = siguiente
+            break
+
+        actual = siguiente
+    
+    if raiz is not None:
+        mensaje.append(f"\nEl metodo converge a {i+1} iteraciones.\n")
+        mensaje.append(f"Raiz encontrada: {raiz}\n")
+    else:
+        mensaje.append(f"\nNo se encontro una raiz con el valor inicial {inicial} en {maxIteraciones} iteraciones.")
+
+    return raiz, mensaje

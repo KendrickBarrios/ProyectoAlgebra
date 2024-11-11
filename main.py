@@ -11,6 +11,7 @@ import cramer
 import inversa
 import funciones
 import biseccion
+import newton
 from sympy import symbols, sympify
 from sympy.parsing.sympy_parser import parse_expr, standard_transformations, implicit_multiplication_application
 import os
@@ -33,6 +34,7 @@ def main():
         print("10. Aplicar regla de Cramer")
         print("11. Obtener la inversa de una matriz")
         print("12. Encontrar raiz de una funcion por metodo de biseccion")
+        print("13. Encontrar raiz de una funcion por metodo de Newton-Raphson")
         print("14. Salir del programa\n")
         op = input("Elija la opcion que desea realizar: ")
         print("")
@@ -166,15 +168,30 @@ def main():
             funcion = funciones.leerFuncion()
             print("")
             intervalo = funciones.leerIntervalo()
+            error = funciones.leerError()
             multi = input("\nDesea encontrar todas las raices existentes en el intervalo? (s/n): ").lower()
             os.system("cls")
             if multi == "s":
-                raiz, mensaje = biseccion.metodoBiseccionMultiraiz(funcion, intervalo)
+                raiz, mensaje = biseccion.metodoBiseccionMultiraiz(funcion, intervalo, error)
             else:
-                raiz, mensaje = biseccion.metodoBiseccion(funcion, intervalo)
+                raiz, mensaje = biseccion.metodoBiseccion(funcion, intervalo, error)
             print(titulo)
             vector.mostrarResultado(mensaje)
             input("\nPresione ENTER para continuar.")
+        elif op == "13":
+            titulo = "13. Encontrar raiz de una funcion por metodo de Newton-Raphson\n"
+            os.system("cls")
+            print(titulo)
+            funcion = funciones.leerFuncion()
+            derivada = funciones.derivar(funcion, symbols('x'))
+            print("")
+            valorInicial, numIteraciones = funciones.leerInicialIteraciones()
+            error = funciones.leerError()
+            raiz, mensaje = newton.metodoNewtonRaphson(funcion, derivada, valorInicial, numIteraciones, error)
+            os.system("cls")
+            print(titulo)
+            vector.mostrarResultado(mensaje)
+            input("Presione ENTER para continuar.")
         elif op == "14":
             os.system("cls")
             print("Gracias por usar el programa.")
