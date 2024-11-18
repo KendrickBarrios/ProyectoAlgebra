@@ -48,9 +48,10 @@ def metodoBiseccion(funcion, intervalo, error):
         else:
             intervalo[0] = c
 
-    stringRaiz = "{:.6f}".format(c)
-    mensaje.append(f"\nRaiz encontrada: {stringRaiz}\n")
-    mensaje.append(f"Numero de iteraciones: {iteraciones}")
+    sRaiz = "{:.6f}".format(c)
+    seA = "{:.6f}".format(abs(evaluaciones[2]))
+    mensaje.append(f"\nEl metodo converge a {iteraciones} iteraciones con un error absoluto de {seA}.\n")
+    mensaje.append(f"\nRaiz encontrada: {sRaiz}\n")
 
     return c, mensaje
 

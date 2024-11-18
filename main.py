@@ -11,6 +11,7 @@ import cramer
 import inversa
 import funciones
 import biseccion
+import falsapos
 import newton
 from sympy import symbols, sympify
 from sympy.parsing.sympy_parser import parse_expr, standard_transformations, implicit_multiplication_application
@@ -18,12 +19,16 @@ import os
 
 def main():
     op = "."
-    while op != "14":
+    ancho = 65
+    encabezados = ["Sistemas de ecuaciones lineales", "Operaciones con matrices/vectores", "Metodos numericos"]
+    while op != "16":
         os.system("cls")
         print("Proyecto de Algebra Lineal\n")
         print("Opciones")
+        print("\n" + encabezados[0].center(ancho, "-") + "\n")
         print("1. Reducir mediante Eliminacion Gaussiana")
         print("2. Reducir a Forma escalonada")
+        print("\n" + encabezados[1].center(ancho, "-") + "\n")
         print("3. Sumar vectores")
         print("4. Multiplicar vectores")
         print("5. Transponer matriz")
@@ -33,9 +38,13 @@ def main():
         print("9. Calcular el determinante de una matriz")
         print("10. Aplicar regla de Cramer")
         print("11. Obtener la inversa de una matriz")
+        print("\n" + encabezados[2].center(ancho, "-") + "\n")
         print("12. Encontrar raiz de una funcion por metodo de biseccion")
-        print("13. Encontrar raiz de una funcion por metodo de Newton-Raphson")
-        print("14. Salir del programa\n")
+        print("13. Encontrar raiz de una funcion por metodo de falsa posicion")
+        print("14. Encontrar raiz de una funcion por metodo de Newton-Raphson")
+        print("15. Encontrar raiz de una funcion por metodo de secante")
+        print("\n" + "-"*ancho + "\n")
+        print("16. Salir del programa\n")
         op = input("Elija la opcion que desea realizar: ")
         print("")
 
@@ -179,7 +188,20 @@ def main():
             vector.mostrarResultado(mensaje)
             input("\nPresione ENTER para continuar.")
         elif op == "13":
-            titulo = "13. Encontrar raiz de una funcion por metodo de Newton-Raphson\n"
+            titulo = "13. Encontrar raiz de una funcion por metodo de falsa posicion\n"
+            os.system("cls")
+            print(titulo)
+            funcion = funciones.leerFuncion()
+            print("")
+            intervalo = funciones.leerIntervalo()
+            error = funciones.leerError()
+            raiz, mensaje = falsapos.metodoFalsaPosicion(funcion, intervalo, error)
+            os.system("cls")
+            print(titulo)
+            vector.mostrarResultado(mensaje)
+            input("\nPresione ENTER para continuar.")
+        elif op == "14":
+            titulo = "14. Encontrar raiz de una funcion por metodo de Newton-Raphson\n"
             os.system("cls")
             print(titulo)
             funcion = funciones.leerFuncion()
@@ -187,12 +209,12 @@ def main():
             print("")
             valorInicial, numIteraciones = funciones.leerInicialIteraciones()
             error = funciones.leerError()
-            raiz, mensaje = newton.metodoNewtonRaphson(funcion, derivada, valorInicial, numIteraciones, error)
             os.system("cls")
             print(titulo)
+            raiz, mensaje = newton.metodoNewtonRaphson(funcion, derivada, valorInicial, numIteraciones, error)
             vector.mostrarResultado(mensaje)
             input("Presione ENTER para continuar.")
-        elif op == "14":
+        elif op == "16":
             os.system("cls")
             print("Gracias por usar el programa.")
             input("Presione ENTER para continuar.")
