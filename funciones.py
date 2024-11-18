@@ -138,3 +138,26 @@ def leerInicialIteraciones():
             pase = False
 
     return valor, iteraciones
+
+def leerInicialesIteraciones():
+    pase = False
+    while not pase:
+        pase = True
+        try:
+            valorAnterior = float(input("\nIngrese el primer valor inicial a evaluar: "))
+            valorActual = float(input("Ingrese el segundo valor inicial a evaluar: "))
+            iteraciones = int(input("\nIngrese el numero de iteraciones a realizar: "))
+            if valorAnterior == valorActual:
+                print("\nLos valores iniciales ingresados deben ser diferentes entre si.")
+                input("Presione ENTER para continuar.\n")
+            if iteraciones < 1:
+                pase = False
+                print("\nEl numero de iteraciones ingresado debe ser mayor o igual a 1.")
+                input("Presione ENTER para continuar.\n")
+        except ValueError:
+            print("\nEl valor inicial ingresado debe ser un numero entero o con decimales.")
+            print("El numero de iteraciones debe ser un numero entero.")
+            input("Presione ENTER para continuar.\n")
+            pase = False
+
+    return valorAnterior, valorActual, iteraciones

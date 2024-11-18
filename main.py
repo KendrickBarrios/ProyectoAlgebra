@@ -13,6 +13,7 @@ import funciones
 import biseccion
 import falsapos
 import newton
+import secante
 from sympy import symbols, sympify
 from sympy.parsing.sympy_parser import parse_expr, standard_transformations, implicit_multiplication_application
 import os
@@ -212,6 +213,18 @@ def main():
             os.system("cls")
             print(titulo)
             raiz, mensaje = newton.metodoNewtonRaphson(funcion, derivada, valorInicial, numIteraciones, error)
+            vector.mostrarResultado(mensaje)
+            input("Presione ENTER para continuar.")
+        elif op == "15":
+            titulo = "15. Encontrar raiz de una funcion por metodo de secante\n"
+            os.system("cls")
+            print(titulo)
+            funcion = funciones.leerFuncion()
+            valorAnterior, valorInicial, numIteraciones = funciones.leerInicialesIteraciones()
+            error = funciones.leerError()
+            os.system("cls")
+            print(titulo)
+            raiz, mensaje = secante.metodoSecante(funcion, valorAnterior, valorInicial, numIteraciones, error)
             vector.mostrarResultado(mensaje)
             input("Presione ENTER para continuar.")
         elif op == "16":
