@@ -18,6 +18,18 @@ def metodoFalsaPosicion(funcion, intervalo, error):
 
     while True:
         iteraciones += 1
+        c = None
+
+        if not funciones.validar_dominio(funcion, symbols('x'), intervalo[0]) and not funciones.validar_dominio(funcion, symbols('x'), intervalo[1]):
+            mensaje.append(f"\nValores fuera del dominio de la función: a = {intervalo[0]}, b = {intervalo[1]}. Método detenido.\n")
+            break
+        elif not funciones.validar_dominio(funcion, symbols('x'), intervalo[0]):
+            mensaje.append(f"\nValor fuera del dominio de la función: a = {intervalo[0]}. Método detenido.\n")
+            break
+        elif not funciones.validar_dominio(funcion, symbols('x'), intervalo[1]):
+            mensaje.append(f"\nValor fuera del dominio de la función: b = {intervalo[1]}. Método detenido.\n")
+            break
+
 
         # Evaluación en los extremos del intervalo
         evaluaciones[0] = funciones.evaluarFuncion(funcion, intervalo[0])
@@ -25,6 +37,11 @@ def metodoFalsaPosicion(funcion, intervalo, error):
 
         # Cálculo del punto intermedio usando la fórmula de Falsa Posición
         c = intervalo[1] - (evaluaciones[1] * (intervalo[0] - intervalo[1])) / (evaluaciones[0] - evaluaciones[1])
+
+        if not funciones.validar_dominio(funcion, symbols('x'), c):
+            mensaje.append(f"\nValor fuera del dominio de la función: c = {c}. Método detenido.\n")
+            break
+
         evaluaciones[2] = funciones.evaluarFuncion(funcion, c)
 
         # Formatear para los mensajes
@@ -49,8 +66,11 @@ def metodoFalsaPosicion(funcion, intervalo, error):
             intervalo[0] = c
 
     # Fuera del ciclo: agregar información final
-    sRaiz = "{:.6f}".format(c)
-    mensaje.append(f"\nEl metodo converge a {iteraciones} iteraciones con un error absoluto de {seA}.\n")
-    mensaje.append(f"\nRaiz encontrada: {sRaiz}\n")
-
+    if c is None:
+        pass
+    else:
+        sRaiz = "{:.6f}".format(c)
+        mensaje.append(f"\nEl metodo converge a {iteraciones} iteraciones con un error absoluto de {seA}.\n")
+        mensaje.append(f"\nRaiz encontrada: {sRaiz}\n")
+    
     return c, mensaje

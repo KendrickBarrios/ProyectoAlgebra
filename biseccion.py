@@ -16,13 +16,28 @@ def metodoBiseccion(funcion, intervalo, error):
     mensaje.append(f"{a:^{ancho}} | {b:^{ancho}} | {c:^{ancho}} | {fa:^{ancho}} | {fb:^{ancho}} | {fc:^{ancho}}")
     mensaje.append(f"{relleno}+-{relleno}+-{relleno}+-{relleno}+-{relleno}+-{relleno}")
 
-
     while True:
         iteraciones += 1
+        c = None
+
+        if not funciones.validar_dominio(funcion, symbols('x'), intervalo[0]) and not funciones.validar_dominio(funcion, symbols('x'), intervalo[1]):
+            mensaje.append(f"\nValores fuera del dominio de la función: a = {intervalo[0]}, b = {intervalo[1]}. Método detenido.\n")
+            break
+        elif not funciones.validar_dominio(funcion, symbols('x'), intervalo[0]):
+            mensaje.append(f"\nValor fuera del dominio de la función: a = {intervalo[0]}. Método detenido.\n")
+            break
+        elif not funciones.validar_dominio(funcion, symbols('x'), intervalo[1]):
+            mensaje.append(f"\nValor fuera del dominio de la función: b = {intervalo[1]}. Método detenido.\n")
+            break
 
         evaluaciones[0] = funciones.evaluarFuncion(funcion, intervalo[0])
         evaluaciones[1] = funciones.evaluarFuncion(funcion, intervalo[1])
         c = float(intervalo[0] + intervalo[1]) / 2 
+
+        if not funciones.validar_dominio(funcion, symbols('x'), c):
+            mensaje.append(f"\nValor fuera del dominio de la función: c = {c}. Método detenido.\n")
+            break
+
         evaluaciones[2] = funciones.evaluarFuncion(funcion, c)
 
         mensaje.append("")
@@ -48,10 +63,13 @@ def metodoBiseccion(funcion, intervalo, error):
         else:
             intervalo[0] = c
 
-    sRaiz = "{:.6f}".format(c)
-    seA = "{:.6f}".format(abs(evaluaciones[2]))
-    mensaje.append(f"\nEl metodo converge a {iteraciones} iteraciones con un error absoluto de {seA}.\n")
-    mensaje.append(f"\nRaiz encontrada: {sRaiz}\n")
+    if c is None:
+        pass
+    else:
+        sRaiz = "{:.6f}".format(c)
+        seA = "{:.6f}".format(abs(evaluaciones[2]))
+        mensaje.append(f"\nEl metodo converge a {iteraciones} iteraciones con un error absoluto de {seA}.\n")
+        mensaje.append(f"\nRaiz encontrada: {sRaiz}\n")
 
     return c, mensaje
 

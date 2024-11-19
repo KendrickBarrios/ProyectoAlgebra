@@ -1,4 +1,4 @@
-from sympy import symbols, sympify, diff
+from sympy import log, sqrt, denom, symbols, sympify, diff
 from sympy.parsing.sympy_parser import parse_expr, standard_transformations, implicit_multiplication_application
 
 # Definicion simbolica de la variable
@@ -161,3 +161,28 @@ def leerInicialesIteraciones():
             pase = False
 
     return valorAnterior, valorActual, iteraciones
+
+def validar_dominio(funcion, x, valor):
+    try:
+        # Verificar si hay logaritmos en la función
+        for arg in funcion.atoms(log):
+            if arg.args[0].subs(x, valor) <= 0:
+                return False  # Argumento de log debe ser mayor que 0
+        
+        # Verificar si hay raíces cuadradas en la función
+        for arg in funcion.atoms(sqrt):
+            if arg.args[0].subs(x, valor) < 0:
+                return False  # Argumento de sqrt debe ser mayor o igual a 0
+        
+        # Verificar divisiones: el denominador no debe ser 0
+        denominador = denom(funcion)
+        if denominador.subs(x, valor) == 0:
+            return False
+
+        # Si pasa todas las validaciones, el valor está en el dominio
+        return True
+
+    except Exception as e:
+        # En caso de error, asumimos que el valor no es válido
+        print(f"Error al validar el dominio: {e}")
+        return False

@@ -19,8 +19,14 @@ def metodoSecante(funcion, anterior, inicial, maxIteraciones, error):
     ant = anterior
     for i in range(maxIteraciones):
         # Verificar dominio de los valores actuales
-        if not validar_dominio(funcion, symbols('x'), ant) or not validar_dominio(funcion, symbols('x'), actual):
+        if not funciones.validar_dominio(funcion, symbols('x'), ant) and not funciones.validar_dominio(funcion, symbols('x'), actual):
             mensaje.append(f"\nValores fuera del dominio de la función: x0 = {ant}, x1 = {actual}. Método detenido.\n")
+            break
+        elif not funciones.validar_dominio(funcion, symbols('x'), ant):
+            mensaje.append(f"\nValor fuera del dominio de la función: x0 = {ant}. Método detenido.\n")
+            break
+        elif not funciones.validar_dominio(funcion, symbols('x'), actual):
+            mensaje.append(f"\nValor fuera del dominio de la función: x1 = {actual}. Método detenido.\n")
             break
 
         fxiAnt = funciones.evaluarFuncion(funcion, ant)
@@ -49,7 +55,7 @@ def metodoSecante(funcion, anterior, inicial, maxIteraciones, error):
         siguiente = actual - (fxi * (ant - actual)) / (fxiAnt - fxi)
 
         # Verifica el dominio de la siguiente iteracion
-        if not validar_dominio(funcion, symbols('x'), siguiente):
+        if not funciones.validar_dominio(funcion, symbols('x'), siguiente):
             mensaje.append(f"\nEl siguiente valor está fuera del dominio: x = {siguiente}. Metodo detenido.\n")
             break
 
@@ -73,29 +79,3 @@ def metodoSecante(funcion, anterior, inicial, maxIteraciones, error):
         mensaje.append(f"\nNo se encontro una raiz con el valor inicial {inicial} en {i+1} iteraciones.\n")
 
     return raiz, mensaje
-
-
-def validar_dominio(funcion, x, valor):
-    try:
-        # Verificar si hay logaritmos en la función
-        for arg in funcion.atoms(log):
-            if arg.args[0].subs(x, valor) <= 0:
-                return False  # Argumento de log debe ser mayor que 0
-        
-        # Verificar si hay raíces cuadradas en la función
-        for arg in funcion.atoms(sqrt):
-            if arg.args[0].subs(x, valor) < 0:
-                return False  # Argumento de sqrt debe ser mayor o igual a 0
-        
-        # Verificar divisiones: el denominador no debe ser 0
-        denominador = denom(funcion)
-        if denominador.subs(x, valor) == 0:
-            return False
-
-        # Si pasa todas las validaciones, el valor está en el dominio
-        return True
-
-    except Exception as e:
-        # En caso de error, asumimos que el valor no es válido
-        print(f"Error al validar el dominio: {e}")
-        return False

@@ -18,6 +18,16 @@ def metodoNewtonRaphson(funcion, derivada, inicial, maxIteraciones, error):
 
     actual = inicial
     for i in range(maxIteraciones):
+        if not funciones.validar_dominio(funcion, symbols('x'), actual) and not funciones.validar_dominio(derivada, symbols('x'), actual):
+            mensaje.append(f"\nValor fuera del dominio de la función y su derivada: actual = {actual}. Método detenido.\n")
+            break
+        elif not funciones.validar_dominio(funcion, symbols('x'), actual):
+            mensaje.append(f"\nValor fuera del dominio de la función: actual = {actual}. Método detenido.\n")
+            break
+        elif not funciones.validar_dominio(derivada, symbols('x'), actual):
+            mensaje.append(f"\nValor fuera del dominio de la derivada de la función: actual = {actual}. Método detenido.\n")
+            break
+
         fxi = funciones.evaluarFuncion(funcion, actual)
         dfxi = funciones.evaluarFuncion(derivada, actual)
 
