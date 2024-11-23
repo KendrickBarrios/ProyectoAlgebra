@@ -59,11 +59,12 @@ def resolverMatriz(mat):
                 print("-"*(len(mensaje) - 1), end=">\n")
                 print("")
                 matriz.mostrarMatriz(mat)
-                if esInconsistente(mat) is None:
-                    return None
-                elif tieneInfinitas(mat):
-                    matriz.mostrarInfinitas(mat)
-                    return None
+
+    if esInconsistente(mat) is None:
+        return None
+    elif tieneInfinitas(mat):
+        matriz.mostrarInfinitas(mat)
+        return None
 
     return mat
 
