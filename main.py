@@ -73,7 +73,7 @@ def main():
             titulo = "3. Sumar vectores\n"
             print(titulo)
             _, _, _, resultado = operacionesVectores.sumaVectores(titulo)
-            vector.mostrarResultadoSumaVectores(resultado)
+            vector.mostrarResultado(resultado)
             input("\nPresione ENTER para continuar.")
         elif op == "4":
             os.system("cls")
