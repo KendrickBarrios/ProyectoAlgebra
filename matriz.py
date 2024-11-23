@@ -186,7 +186,6 @@ def mostrarUnicaGauss(matriz):
 
 def mostrarInconsistente(matriz):
     print("El sistema no tiene solucion\n")
-    mostrarMatriz(matriz)
 
 def mostrarInfinitas(matriz):
     print("El sistema tiene infinitas soluciones\n")
