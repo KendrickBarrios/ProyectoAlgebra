@@ -185,6 +185,13 @@ def mostrarUnicaGauss(matriz):
         print(f" = {fila[i]}")
 
 def mostrarInconsistente(matriz):
+    for i in range(matriz):
+        todosCero = True
+        for j in range(len(matriz[0])-1):
+            if matriz[i][j] != 0:
+                todosCero = False
+        if todosCero:
+            print(f"Inconsistencia en la fila {i+1}, 0 = {str(matriz[i][j])}\n")
     print("El sistema no tiene solucion\n")
 
 def mostrarInfinitas(matriz):
