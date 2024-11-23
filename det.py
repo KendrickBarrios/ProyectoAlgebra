@@ -19,7 +19,7 @@ def calcularDeterminante(mat):
                 break
         if columnaCero:
             mensaje.append(f"Dado que todas las entradas de la columna [{i}], la matriz es linealmente dependiente.\n")
-            return mensaje, 0  # El determinante es 0
+            return mensaje, [], 0  # El determinante es 0
 
     # Proceso de eliminación de Gauss para obtener la matriz triangular superior
     for i in range(min(n, m)):
@@ -33,23 +33,29 @@ def calcularDeterminante(mat):
                     matrices.append(copy.deepcopy(mat))
                     break
 
-        # Si todavía es 0 después de intentar el intercambio, la matriz es singular
-        if mat[i][i] == 0:
-            mensaje.append(f"La matriz es singular, determinante es 0.\n")
-            return mensaje, [], 0
-        
         # Hacemos ceros debajo del pivote
         for j in range(i + 1, n):
             if mat[j][i] != 0:
                 factor = mat[j][i] / mat[i][i]
                 for k in range(i, m):
                     mat[j][k] -= factor * mat[i][k]
+                print(f"f{j + 1} -> f{j + 1} - ({factor})f{i + 1}\n")
+                print(mat)
                 mensaje.append(f"f{j + 1} -> f{j + 1} - ({factor})f{i + 1}\n")
                 matrices.append(copy.deepcopy(mat))
 
+    mensaje.append(f"\nNumero de intercambios realizados: {intercambios}")
+
     # Cálculo del determinante
+    mensaje.append("\n|A| = ")
     for i in range(min(n, m)):
+        if i == 0:
+            mensaje[-1] += f"{str(mat[i][i])} "
+        else:
+            mensaje[-1] += f"* {str(mat[i][i])} "
         det *= mat[i][i]
+    
+    mensaje[-1] += f"= {str(det)}"
 
     # Ajustar el signo del determinante según los intercambios
     if intercambios % 2 != 0:
@@ -60,6 +66,7 @@ def calcularDeterminante(mat):
 def mostrarResultado(mat, mensaje, matrices):
     matriz.mostrarMatrizS(mat)
     print("")
-    for i in range(len(matrices)):
+    for i in range(len(mensaje)):
         print(mensaje[i])
-        matriz.mostrarMatrizS(matrices[i])
+        if i < len(matrices):
+            matriz.mostrarMatrizS(matrices[i])
